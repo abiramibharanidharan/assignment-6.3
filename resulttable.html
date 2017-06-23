@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+      <head>
+            <title>Assignment 6.3</title>
+      <script>
+               var student=new Array();
+               student.push(["SName","Lang","Math","Science","Total","Average","Grade"]);
+               /*to add the student record */
+               function add()
+               {
+                   var sname=document.getElementById("sname").value;
+                   var lang=parseInt(document.getElementById("lang").value);
+                   var math=parseInt(document.getElementById("math").value);
+                   var sci=parseInt(document.getElementById("sci").value);
+                    student.push([sname,lang,math,sci]);                                            
+               	    
+                }
+
+		function createtable()
+		{
+			var totalmark = 0;
+                        var avarage =0;
+                        var grade="Pass";
+               
+                  //Create A Table
+                         var table=document.createElement("TABLE");
+                          table.border="1";
+                  
+                    //Get the column count
+                         var columncount=student[0].length;
+
+			var columncount1=student[1].length;
+                   //add the header row
+                          var row=table.insertRow(-1);
+                          for(var i=0;i<columncount;i++)
+                          {
+                             var headerCell=document.createElement("TH");
+                              headerCell.innerHTML=student[0][i];
+                              row.appendChild(headerCell);
+                          }
+
+
+                      //Add the data rows.
+                          
+                          for (var i = 1; i < student.length; i++)
+                          {
+                                row = table.insertRow(-1);
+                                for (var j = 0; j < columncount1; j++)
+                                {
+                                          
+                                     var cell = row.insertCell(-1);
+					cell.innerHTML = student[i][j];
+                                       
+                                      if(j==1 || j==2|| j==3)
+
+                                           {
+                                      totalmark =totalmark + student[i][j];
+                                           
+                                           }
+                                        if(student[i][j]<30)
+                                           {
+                                             grade="Fail";
+                                            }  
+                                 }
+				var cell = row.insertCell(-1);
+				cell.innerHTML = totalmark;
+                                avarage=totalmark/3;
+                                var cell = row.insertCell(-1);
+				cell.innerHTML = avarage;
+                                var cell = row.insertCell(-1);
+                                cell.innerHTML = grade;
+                           }
+                            
+                          var dvtable=document.getElementById("dvtable");
+                          dvtable.innerHTML=" ";
+                          dvtable.appendChild(table);
+                    
+                         
+		}
+                /*Clear the input feild function*/
+                function clearfeild()
+                 {
+                       document.getElementById("sname").value=" ";
+                          
+                       document.getElementById("lang").value=" ";
+                       document.getElementById("math").value=" ";
+                     
+                     document.getElementById("sci").value=" ";
+                    } 
+             </script>
+       </head>
+       <body>
+                  <h2>Student Record</h2>
+                  <form>
+                       <p>Enter student name</p>
+                       <input type="text"  id="sname"/>
+                       <P>Enter Language Mark</p>
+                       <input type="text"  id="lang" />
+                       <p>Enter Maths Mark</p>
+                       <input type="text"  id="math"/>
+                       <p>Enter Science Mark</p>
+                       <input type="text"  id="sci" />
+             
+                      <input type="button" value="Add" onclick="add()" />
+
+		      <input type="button" value="Table" onclick="createtable()" />
+                      <input type="button" value="ClearFeild" onclick="clearfeild()" />
+                     </form>
+                     <p id="demo"></p>
+                     <p id="demo1"></p>
+                     <div id="dvtable">
+                      </div>                
+              
+         </body>
+ </html>
